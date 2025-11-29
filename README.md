@@ -8,4 +8,5 @@ Build a task management system step by step.
 ## ✅ Progress
 - Initial setup with a `main()` function that prints a welcome message
 - Add Task class with id, title and description
-- ✏️ Currently creating a Column class with add and remove task methods
+- Add Column class with add and remove task methods
+- ✏️ Next: Create a Board class to manage multiple columns and display tasks across the board
