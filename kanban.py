@@ -23,12 +23,12 @@ class Column:
 
     def remove_task(self, task_id):
 
-        # new_tasks = []                     # start with an empty list
-        # for task in self.tasks:            # go through each task in the column
-        #     if task.id != task_id:         # check if the task's id is NOT the one to remove
-        #         new_tasks.append(task)     # if so, keep it by adding to new list
+        # new_tasks = []                     
+        # for task in self.tasks:            
+        #     if task.id != task_id:         
+        #         new_tasks.append(task)     
 
-        # self.tasks = new_tasks             # replace old list with the filtered one
+        # self.tasks = new_tasks             
 
         # or
 
@@ -38,25 +38,57 @@ class Column:
 
         return f"Column({self.name}, tasks={len(self.tasks)})"
 
+class Board:
+
+    def __init__(self):
+
+        self.columns = {}
+
+    def add_column(self, column):
+
+        self.columns[column.name] = column
+
+    def add_task(self, column_name, task):
+
+        if column_name in self.columns:
+
+            self.columns[column_name].add_task(task)
+
+    def show_board(self):
+
+        for column_name, column in self.columns.items():
+
+            print(f"[{column_name}]")
+
+            for task in column.tasks:
+
+                print(f" - {task.title}")
+
+            print()
+
 def main():
 
     print("Welcome to the Kanban Board!")
 
     task1 = Task(1, "Implement feature X", "Details about feature X")
     task2 = Task(2, "Fix bug Y", "Details about bug Y")
+    task3 = Task(3, "Write documentation", "Details about documentation")
 
     todo_column = Column("To Do")
-    todo_column.add_task(task1) # Column(To Do, tasks=1)
-
     in_progress_column = Column("In Progress")
-    in_progress_column.add_task(task2) # Column(In Progress, tasks=1)
+    done_column = Column("Done")
 
-    print(todo_column)
-    print(in_progress_column)
+    board = Board()
 
-    todo_column.remove_task(1) # Column(To Do, tasks=0) # remove by id, not amount
+    board.add_column(todo_column)
+    board.add_column(in_progress_column)
+    board.add_column(done_column)
 
-    print(todo_column)
+    board.add_task("To Do", task1)
+    board.add_task("To Do", task2)
+    board.add_task("In Progress", task3)
+
+    board.show_board()
 
 if __name__ == "__main__":
 
