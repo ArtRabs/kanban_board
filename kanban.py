@@ -66,6 +66,19 @@ class Board:
 
             print()
 
+    def move_task(self, task_id, from_column, to_column):
+
+        if from_column in self.columns and to_column in self.columns:
+
+            for task in self.columns[from_column].tasks:
+
+                if task.id == task_id:
+
+                    self.columns[to_column].add_task(task)
+                    self.columns[from_column].remove_task(task_id)
+
+                    return
+
 def main():
 
     print("Welcome to the Kanban Board!")
@@ -88,6 +101,11 @@ def main():
     board.add_task("To Do", task2)
     board.add_task("In Progress", task3)
 
+    board.show_board()
+
+    board.move_task(1, "To Do", "In Progress")
+
+    print("\n--- After Moving Task 1 ---")
     board.show_board()
 
 if __name__ == "__main__":
