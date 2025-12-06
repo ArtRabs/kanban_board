@@ -105,12 +105,39 @@ class Board:
             json.dump(data, f, indent=4)
 
         print(f"Board saved to {filename}")
+
+    def load_board(self, filename="board.json"):
+
+        try:
+
+            with open(filename, "r") as f:
+
+                data = json.load(f)
+
+            for column in self.columns.values():
+
+                column.tasks = []
+
+            for column_name, tasks in data.items():
+
+                if column_name in self.columns:
+
+                    for task_data in tasks:
+
+                        self.add_task(column_name, Task(task_data["id"], task_data["title"], task_data["description"]))
+
+            print(f"Board loaded from {filename}")
+
+        except FileNotFoundError:
+
+            print(f"No save file found: {filename}")
+
                 
 def menu(board):
 
     while True:
 
-        command = input("Enter command (add/move/show/save/quit): ")
+        command = input("Enter command (add/move/show/save/load/quit): ")
 
         if command == "show":
 
@@ -136,6 +163,10 @@ def menu(board):
         elif command == "save":
 
             board.save_board()
+
+        elif command == "load":
+
+            board.load_board()
         
         elif command == "quit":
 
