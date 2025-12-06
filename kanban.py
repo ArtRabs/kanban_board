@@ -1,3 +1,5 @@
+import json
+
 class Task:
 
     def __init__(self, id, title, description=""):
@@ -80,11 +82,35 @@ class Board:
 
                     return
                 
+    def save_board(self, filename="board.json"):
+
+        data = {}
+
+        for column_name, column in self.columns.items():
+
+            data[column_name] = [
+
+                {
+                    "id": task.id,
+                    "title": task.title,
+                    "description": task.description
+                }
+
+                for task in column.tasks
+
+            ]
+
+        with open(filename, "w") as f:
+
+            json.dump(data, f, indent=4)
+
+        print(f"Board saved to {filename}")
+                
 def menu(board):
 
     while True:
 
-        command = input("Enter command (add/move/show/quit): ")
+        command = input("Enter command (add/move/show/save/quit): ")
 
         if command == "show":
 
@@ -107,6 +133,10 @@ def menu(board):
 
             board.add_task(column, Task(task_id, title, description))
 
+        elif command == "save":
+
+            board.save_board()
+        
         elif command == "quit":
 
             print("Exiting Kanban Board...")
