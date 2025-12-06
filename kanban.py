@@ -63,7 +63,7 @@ class Board:
             for task in column.tasks:
 
                 print(f" - ({task.id}) {task.title}: {task.description}")
-                
+
             print()
 
 
@@ -79,35 +79,62 @@ class Board:
                     self.columns[from_column].remove_task(task_id)
 
                     return
+                
+def menu(board):
+
+    while True:
+
+        command = input("Enter command (add/move/show/quit): ")
+
+        if command == "show":
+
+            board.show_board()
+
+        elif command == "move":
+
+            task_id = int(input("Task ID: "))
+            from_col = input("From column: ")
+            to_col = input("To column: ")
+
+            board.move_task(task_id, from_col, to_col)
+
+        elif command == "add":
+
+            task_id = int(input("Task ID: "))
+            title = input("Task title: ")
+            description = input("Task description: ")
+            column = input("Column to add task: ")
+
+            board.add_task(column, Task(task_id, title, description))
+
+        elif command == "quit":
+
+            print("Exiting Kanban Board...")
+
+            break
+
+        else:
+            
+            print("Unknown command, try again.")
 
 def main():
 
     print("Welcome to the Kanban Board!")
-
-    task1 = Task(1, "Implement feature X", "Details about feature X")
-    task2 = Task(2, "Fix bug Y", "Details about bug Y")
-    task3 = Task(3, "Write documentation", "Details about documentation")
 
     todo_column = Column("To Do")
     in_progress_column = Column("In Progress")
     done_column = Column("Done")
 
     board = Board()
-
     board.add_column(todo_column)
     board.add_column(in_progress_column)
     board.add_column(done_column)
 
-    board.add_task("To Do", task1)
-    board.add_task("To Do", task2)
-    board.add_task("In Progress", task3)
+    board.add_task("To Do", Task(1, "Implement feature X", "Details about feature X"))
+    board.add_task("To Do", Task(2, "Fix bug Y", "Details about bug Y"))
+    board.add_task("In Progress", Task(3, "Write documentation", "Details about documentation"))
 
-    board.show_board()
-
-    board.move_task(1, "To Do", "In Progress")
-
-    print("\n--- After Moving Task 1 ---")
-    board.show_board()
+    menu(board)
 
 if __name__ == "__main__":
 
