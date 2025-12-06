@@ -62,9 +62,10 @@ class Board:
 
             for task in column.tasks:
 
-                print(f" - {task.title}")
-
+                print(f" - ({task.id}) {task.title}: {task.description}")
+                
             print()
+
 
     def move_task(self, task_id, from_column, to_column):
 
