@@ -1,0 +1,22 @@
+{
+    "To Do": [
+        {
+            "id": 1,
+            "title": "Implement feature X",
+            "description": "Details about feature X"
+        },
+        {
+            "id": 2,
+            "title": "Fix bug Y",
+            "description": "Details about bug Y"
+        }
+    ],
+    "In Progress": [
+        {
+            "id": 3,
+            "title": "Write documentation",
+            "description": "Details about documentation"
+        }
+    ],
+    "Done": []
+}
