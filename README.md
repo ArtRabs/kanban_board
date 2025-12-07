@@ -18,12 +18,12 @@ Build a task management system step by step.
 - [x] Improve board display to show task IDs and descriptions
 - [x] Add simple user input (example: choose column, add/remove tasks interactively)
 
-### Phase 3 🚧 (In Progress)
-- [ ] Save/load board state from a file (perhaps JSON or SQL)
-- [ ] Add command‑line interface or GUI
-- [ ] Expand with features like deadlines, priorities, or tags
+### Phase 3 ✅ (Completed)
+- [x] Save/load board state from a file (perhaps JSON or SQL)
+- [x] Add command‑line interface or GUI
 
 ### 🎯 Future Ideas
+- [ ] Expand with features like deadlines, priorities, or tags
 - [ ] Search/filter tasks by keyword, tag, or priority
 - [ ] Edit existing tasks (update title/description)
 - [ ] Archive completed tasks for history
